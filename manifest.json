@@ -1,7 +1,7 @@
 {
   "name": "WhatsApp",
   "short_name": "WhatsApp",
-  "start_url": "index.html",
+  "start_url": "https://web.whatsapp.com",
   "display": "standalone",
   "background_color": "#075E54",
   "theme_color": "#075E54"
