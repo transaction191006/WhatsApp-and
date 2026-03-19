@@ -26,15 +26,62 @@
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="top-row"><span>WhatsApp</span><span>🔍 ⋮</span></div>
-        <div class="tabs">
-            <div class="tab-active">Chats</div>
-            <div style="opacity:0.6">Updates</div>
-            <div style="opacity:0.6">Calls</div>
+    <div id="main-screen">
+        <div class="header">
+            <div class="top-row"><span>WhatsApp</span><span>🔍 ⋮</span></div>
+            <div class="tabs">
+                <div class="tab-active">Chats</div>
+                <div style="opacity:0.6">Updates</div>
+                <div style="opacity:0.6">Calls</div>
+            </div>
+        </div>
+        
+        <div class="chat-item" onclick="openChat('Alex')">
+            <div class="avatar"></div>
+            <div>
+                <div style="font-weight:bold">Alex</div>
+                <div style="color:gray; font-size:14px">See you at the park?</div>
+            </div>
         </div>
     </div>
-    <div style="padding: 20px; color: gray;">No chats yet. Start a conversation!</div>
-    <div class="fab">+</div>
+
+    <div id="chat-screen" style="display:none; height:100vh; flex-direction:column;">
+        <div class="header" style="display:flex; align-items:center; padding: 10px;">
+            <span onclick="closeChat()" style="margin-right:10px; font-size:24px">←</span>
+            <div class="avatar" style="width:35px; height:35px"></div>
+            <span id="chat-name" style="font-weight:bold">Name</span>
+        </div>
+        
+        <div id="message-area" style="flex:1; background:#e5ddd5; padding:15px; overflow-y:auto;">
+            </div>
+
+        <div style="padding:10px; display:flex; background:#fff;">
+            <input id="msg-input" type="text" placeholder="Type a message" style="flex:1; border-radius:20px; border:1px solid #ccc; padding:10px;">
+            <button onclick="sendMessage()" style="background:var(--wa-green); color:white; border:none; border-radius:50%; width:45px; margin-left:5px">></button>
+        </div>
+    </div>
+
+    <script>
+        // Logic to switch screens
+        function openChat(name) {
+            document.getElementById('main-screen').style.display = 'none';
+            document.getElementById('chat-screen').style.display = 'flex';
+            document.getElementById('chat-name').innerText = name;
+        }
+
+        function closeChat() {
+            document.getElementById('main-screen').style.display = 'block';
+            document.getElementById('chat-screen').style.display = 'none';
+        }
+
+        function sendMessage() {
+            let input = document.getElementById('msg-input');
+            if(input.value !== "") {
+                let area = document.getElementById('message-area');
+                area.innerHTML += `<div style="background:#dcf8c6; padding:8px; margin:5px; align-self:flex-end; border-radius:10px; max-width:70%; float:right; clear:both;">${input.value}</div>`;
+                input.value = "";
+                area.scrollTop = area.scrollHeight;
+            }
+        }
+    </script>
 </body>
-</html>
